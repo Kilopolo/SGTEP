@@ -12,6 +12,63 @@ Desarrollar un sistema de gestión de tareas simple y efectivo para equipos pequ
 4. Incluir notificaciones y recordatorios para mantener a los usuarios informados sobre las tareas pendientes.
 5. Realizar pruebas de usabilidad con usuarios objetivo para recoger retroalimentación y realizar mejoras.
 
+## Funcionalidades
+
+La aplicación consta de las siguientes funcionalidades principales:
+
+1. **Func1**: Func1.
+....
+
+## Instalación
+
+1. Clona este repositorio:
+
+   ```bash
+   git clone https://tu-repositorio.git
+
+
+2. Instala las dependencias:
+   ```bash
+   npm install
+
+3. Configura Firebase: Configura tu proyecto en Firebase y establece las credenciales en la aplicación para habilitar la autenticación y el almacenamiento de datos.
+
+4. Inicia la aplicación:
+   ```bash
+   npm start
+
+## Tecnologías Utilizadas
+React Native: Para el desarrollo de la interfaz de usuario de la aplicación móvil.
+Firebase: Para la autenticación de usuarios y el almacenamiento de datos.
+Base de Datos Firestore: Para almacenar los datos de elecciones, votos, partidos y candidatos.
+Otros módulos de React Native: Para la navegación, estilos y funcionalidades adicionales.
+Contribución
+Si deseas contribuir a este proyecto, sigue estos pasos:
+
+## Haz un fork del repositorio.
+1. Crea una rama para tus cambios: 
+
+   ```bash
+   git checkout -b feature/nueva-funcionalidad.
+
+2. Realiza tus cambios y asegúrate de que los tests pasen.
+3. Haz un push de tus cambios: 
+
+   ```bash
+   git push origin feature/nueva-funcionalidad.
+
+4. Crea un pull request en el repositorio original.
+
+
+
+
+
+## Tablero de Trello
+
+Puedes seguir nuestro progreso y conocer las tareas pendientes en nuestro tablero de Trello: [Prueba](#).
+
+
+
 ## Contribuir
 
 Si te gustaría contribuir al desarrollo de la Biblioteca Bootcamp-Spring-Biblioteca, por favor consulta nuestra [Guía de Contribución](CONTRIBUTIONS.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
