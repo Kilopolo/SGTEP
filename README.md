@@ -16,7 +16,15 @@ Desarrollar un sistema de gestión de tareas simple y efectivo para equipos pequ
 
 La aplicación consta de las siguientes funcionalidades principales:
 
-1. **Func1**: Func1.
+1. **Crear Notas**: Crear Notas.
+2. **Ver Notas**: Ver notas.
+3. **Editar Notas**: Editar notas.
+4. **Borrar Notas**: Borrar notas.
+5. **Crear Vistas**: Crear Vistas.
+6. **Ver Vistas**: Ver Vistas.
+7. **Editar Vistas**: Editar Vistas.
+8. **Borrar Vistas**: Borrar Vistas.
+9. 
 ....
 
 ## Instalación
@@ -24,7 +32,7 @@ La aplicación consta de las siguientes funcionalidades principales:
 1. Clona este repositorio:
 
    ```bash
-   git clone https://tu-repositorio.git
+   git clone https://github.com/Kilopolo/SGTEP.git
 
 
 2. Instala las dependencias:
@@ -71,7 +79,7 @@ Puedes seguir nuestro progreso y conocer las tareas pendientes en nuestro tabler
 
 ## Contribuir
 
-Si te gustaría contribuir al desarrollo de la Biblioteca Bootcamp-Spring-Biblioteca, por favor consulta nuestra [Guía de Contribución](CONTRIBUTIONS.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
+Si te gustaría contribuir al desarrollo de Sistema de Gestión de Tareas para Equipos Pequeños, por favor consulta nuestra [Guía de Contribución](CONTRIBUTIONS.md) para obtener más información sobre cómo empezar. Apreciamos todas las contribuciones para hacer que la aplicación sea más sólida y confiable.
 
 ## Licencia
 
@@ -79,7 +87,7 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 ## Contacto
 
-Si tienes alguna pregunta o sugerencia, por favor contáctanos en [pablo23dr@gmail.com](mailto:pablo23dr@gmail.com) crea un nuevo problema en este repositorio.
+Si tienes alguna pregunta o sugerencia, por favor contáctanos en [pablo23dr@gmail.com](mailto:pablo23dr@gmail.com) o crea un nuevo problema en este repositorio.
 
 ¡Gracias por tu interés en el Sistema de Gestión de Tareas para Equipos Pequeños!
 
