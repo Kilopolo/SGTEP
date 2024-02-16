@@ -1,4 +1,4 @@
-package com.kilopolo.sgtep;
+package main.java.com.kilopolo.sgtep;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

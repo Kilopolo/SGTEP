@@ -1,12 +1,11 @@
 package com.kilopolo.sgtep.domain;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.lang.NonNull;
 
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Data
@@ -14,9 +13,9 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "user_group")
-public class Nota {
+public class Group {
 
-        @Id
+    @Id
     @GeneratedValue
     private Long id;
     @NonNull
@@ -27,7 +26,7 @@ public class Nota {
     private String country;
     private String postalCode;
     @ManyToOne(cascade=CascadeType.PERSIST)
-    private com.kilopolo.sgtep.domain.User user;
+    private User user;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<Event> events;
