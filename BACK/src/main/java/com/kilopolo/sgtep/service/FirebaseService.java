@@ -1,5 +1,6 @@
 package com.kilopolo.sgtep.service;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,13 +17,22 @@ public class FirebaseService {
 
     @PostConstruct
     public void initializeFirebaseApp() throws IOException {
-        InputStream serviceAccount = this.getClass().getResourceAsStream("/firebase-service-credentials.json");
+//        InputStream serviceAccount = this.getClass().getResourceAsStream("/firebase-service-credentials.json");
+//
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//                .setDatabaseUrl("https://fir-ml-bf63d.firebaseio.com").build();
+//
+//        FirebaseApp.initializeApp(options);
+        FileInputStream serviceAccount =
+                new FileInputStream("path/to/serviceAccountKey.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://fir-ml-bf63d.firebaseio.com").build();
+                .build();
 
         FirebaseApp.initializeApp(options);
+
     }
 
 }
