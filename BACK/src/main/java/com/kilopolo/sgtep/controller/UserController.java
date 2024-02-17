@@ -1,6 +1,6 @@
 package com.kilopolo.sgtep.controller;
 
-import com.kilopolo.sgtep.domain.User;
+import com.kilopolo.sgtep.model.User;
 import com.kilopolo.sgtep.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

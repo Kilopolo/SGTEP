@@ -1,4 +1,4 @@
-package com.kilopolo.sgtep.domain;
+package com.kilopolo.sgtep.model;
 
 
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.kilopolo.sgtep.initializers;
 
 
-import com.kilopolo.sgtep.domain.*;
+import com.kilopolo.sgtep.model.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

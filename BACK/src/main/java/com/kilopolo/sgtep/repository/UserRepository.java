@@ -2,7 +2,7 @@ package com.kilopolo.sgtep.repository;
 
 import java.util.concurrent.ExecutionException;
 
-import com.kilopolo.sgtep.domain.User;
+import com.kilopolo.sgtep.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
