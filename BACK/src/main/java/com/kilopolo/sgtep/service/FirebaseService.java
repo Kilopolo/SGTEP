@@ -17,21 +17,14 @@ public class FirebaseService {
 
     @PostConstruct
     public void initializeFirebaseApp() throws IOException {
-//        InputStream serviceAccount = this.getClass().getResourceAsStream("/firebase-service-credentials.json");
-//
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//                .setDatabaseUrl("https://fir-ml-bf63d.firebaseio.com").build();
-//
-//        FirebaseApp.initializeApp(options);
-        FileInputStream serviceAccount =
-                new FileInputStream("path/to/serviceAccountKey.json");
+        InputStream serviceAccount = this.getClass().getResourceAsStream("/firebase-service-credentials.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
+                .setDatabaseUrl("https://sgt-ep.firebaseio.com").build();
 
         FirebaseApp.initializeApp(options);
+
 
     }
 
