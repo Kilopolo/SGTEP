@@ -106,19 +106,6 @@ public class UsersController {
 	}
 	
 
-	// USER
-	// LECTORES
-	@GetMapping("/perfil")
-	public String mostrarLectores(Model modelo) {
-		User activeUser = getActiveUser();
-		modelo.addAttribute("user", activeUser);
-		return "lector/perfil";
-	}
-	@GetMapping("/updateperfil/{id}")
-	public String updateLector(Model modelo, @PathVariable("id") long id) {
-		User user = userservice.getById(id);
-		modelo.addAttribute("user", user);
-		return "lector/updatePerfil";
-	}
+
 
 }
