@@ -13,18 +13,26 @@ Desarrollar un sistema de gestión de tareas simple y efectivo para equipos pequ
 5. Realizar pruebas de usabilidad con usuarios objetivo para recoger retroalimentación y realizar mejoras.
 
 ## Funcionalidades
-
 La aplicación consta de las siguientes funcionalidades principales:
+### Notas
+1. **Crear Notas**: Permite a los usuarios crear nuevas notas en la aplicación.
+2. **Ver Notas**: Permite a los usuarios ver todas las notas existentes en la aplicación.
+3. **Editar Notas**: Permite a los usuarios editar las notas existentes.
+4. **Borrar Notas**: Permite a los usuarios eliminar notas de la aplicación.
+5. **Compartir Notas**: Permite a los usuarios compartir sus notas con otros usuarios u otras plataformas.
+### Usuarios
+1. **Inicio de sesión**: Permite a los usuarios iniciar sesión en la aplicación para acceder a sus datos y funcionalidades personalizadas.
+2. **Registro de usuario**: Permite a los usuarios registrarse en la aplicación para crear una cuenta personal.
+3. **Borrar cuenta**: Permite a los usuarios eliminar permanentemente su cuenta de la aplicación.
+### Vistas
+1. **Crear Vistas**: Permite a los usuarios crear vistas personalizadas para organizar sus notas de manera específica.
+2. **Ver Vistas**: Permite a los usuarios ver las vistas personalizadas creadas.
+3. **Editar Vistas**: Permite a los usuarios editar las vistas personalizadas existentes.
+4. **Borrar Vistas**: Permite a los usuarios eliminar vistas personalizadas.
+5. **Compartir Vistas**: Permite a los usuarios compartir sus vistas personalizadas con otros usuarios.
 
-1. **Crear Notas**: Crear Notas.
-2. **Ver Notas**: Ver notas.
-3. **Editar Notas**: Editar notas.
-4. **Borrar Notas**: Borrar notas.
-5. **Crear Vistas**: Crear Vistas.
-6. **Ver Vistas**: Ver Vistas.
-7. **Editar Vistas**: Editar Vistas.
-8. **Borrar Vistas**: Borrar Vistas.
-9. 
+
+
 ....
 
 ## Instalación
