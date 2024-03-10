@@ -28,30 +28,20 @@ public class InsertSampleDataService {
 	public void init() {
 
 		/** al parecer si que funciona **/
-		User admin = new User();
-		admin.setEmail("admin@gmail.com");
-		admin.setPassword(bCryptPasswordEncoder.encode("1234"));
-		admin.setRole(rolesService.getRoles()[1]);
-		usersService.save(admin);
-
-		User user = new User();
-		user.setEmail("user@gmail.com");
-		user.setPassword(bCryptPasswordEncoder.encode("1234"));
-		user.setRole(rolesService.getRoles()[0]);
-
-		usersService.save(user);
+//		User admin = new User();
+//		admin.setEmail("admin@gmail.com");
+//		admin.setPassword(bCryptPasswordEncoder.encode("1234"));
+//		admin.setRole(rolesService.getRoles()[1]);
+//		usersService.save(admin);
+//
+//		User user = new User();
+//		user.setEmail("user@gmail.com");
+//		user.setPassword(bCryptPasswordEncoder.encode("1234"));
+//		user.setRole(rolesService.getRoles()[0]);
+//
+//		usersService.save(user);
 		
-//		Copia copia= new Copia();
-//		Lector lector= new Lector();
-		
-//		LocalDate fechaAct = LocalDate.now();
-//		Prestamo nuevoPrestamo = new Prestamo();
-//        nuevoPrestamo.setIdprestamo(50l);
-//        nuevoPrestamo.setFechaInicio(fechaAct);
-//        nuevoPrestamo.setFechaFin(fechaAct.plusDays(30));
-//        nuevoPrestamo.setLector(lector);
-//        nuevoPrestamo.setCopia(copia);
-//        prestamoService.save(nuevoPrestamo);
+
 
 	}
 

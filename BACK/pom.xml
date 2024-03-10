@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kilopolo</groupId>
-    <artifactId>SGTEP</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>sgtep</artifactId>
+    <version>0.0.1</version>
     <name>BACK</name>
     <description>BACK</description>
     <properties>
