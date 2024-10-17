@@ -1,0 +1,58 @@
+/* Estilo para centrar el contenedor de carga */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Abarca toda la altura de la pantalla */
+}
+
+/* Estilo para el logo que gira */
+.logo-spinner {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ajuste de tamaño para el logo */
+.logo {
+  min-width: 300px;
+  min-height: 300px;
+  background-image: url('../img/loading-icon-png-24.png');
+  background-size: cover;
+}
+
+.loadingLogo1 {
+    min-width: 300px;
+    min-height: 300px;
+    background-image: url('../img/loadingLogo1.gif');
+    background-size: cover;
+}
+
+.loadingLogo2 {
+    min-width: 300px;
+    min-height: 300px;
+    background-image: url('../img/loadingLogo2.gif');
+    background-size: cover;
+}
+.loadingLogo3 {
+    min-width: 300px;
+    min-height: 300px;
+    background-image: url('../img/loadingLogo3.gif');
+    background-size: cover;
+}
+
+/* Estilo para el texto de "Loading..." */
+.loading-text {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #007bff; /* Azul como en el tema de Bootstrap */
+}

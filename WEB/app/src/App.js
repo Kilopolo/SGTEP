@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoadingLogo from './components/LoadingLogo.js';
+import { Button } from 'react-bootstrap';
 
 const App = () => {
 
@@ -19,11 +21,19 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    // return <p>Loading...</p>;
+    return (
+    <>
+    
+    <LoadingLogo></LoadingLogo>
+
+    </>)
   }
 
   return (
     <div className="App">
+          <Button href="#">Link</Button> 
+          <Button type="submit">Button</Button>{' '}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className="App-intro">
