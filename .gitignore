@@ -200,3 +200,4 @@ dependency-reduced-pom.xml
 README.html
 *.iml
 .idea
+WEB/app/package-lock.json
