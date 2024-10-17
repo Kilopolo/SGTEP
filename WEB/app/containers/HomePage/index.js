@@ -61,7 +61,7 @@ export function HomePage({ loading, error  }) {
       unregisterAuthObserver();
     };
   }, []);
-
+  
   function logout() {
     firebase.auth().signOut();
   }

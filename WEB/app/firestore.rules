@@ -9,7 +9,7 @@ service cloud.firestore {
     
     // Bloquear todas las demás lecturas y escrituras
     match /{document=**} {
-      allow read, write: if false;
+      allow read, write: if true;
     }
   }
 }
