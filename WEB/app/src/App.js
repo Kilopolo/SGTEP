@@ -1,66 +1,36 @@
-
-import GestionarNotas from "./components/notas/GestionarNotas.js";
-import AppIntro from "./components/AppIntro.js";
-
-import { Button } from "react-bootstrap";
-import React, { useEffect, useState } from 'react';
-// FIREBASE
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics, logEvent } from "firebase/analytics";
-// import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import LoadingLogo from "./components/LoadingLogo.js";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SplashScreen from "./screens/SplashScreen.js";
+import Menu from './screens/Menu';
+import GestionarNotas from './components/notas/GestionarNotas';
 
 
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-// logEvent(analytics, "notification_received");
+function Pagina1() {
+  return <h2>Página 1</h2>;
+}
 
-// Get a list of cities from your database
-// async function getUsers(db) {
-//   const usersCol = collection(db, "notas");
-//   console.log(usersCol);
-//   const userSnapshot = await getDocs(usersCol);
-//   console.log(userSnapshot);
-//   const userList = userSnapshot.docs.map((doc) => doc.data());
-//   console.log(userList);
-//   console.log(userList.length);
-//   return userList;
-// }
+function Pagina2() {
+  return <h2>Página 2</h2>;
+}
 
-
+function Pagina3() {
+  return <h2>Página 3</h2>;
+}
 
 const App = () => {
-  // const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const db = getFirestore(app);
-  //     const usersList = await getUsers(db);
-  //     setUsers(usersList);
-  //     setLoading(false);
-  //   };
-
-  //   fetchUsers();
-  // }, []);
-  // if (loading) {
-  //   return <LoadingLogo></LoadingLogo>;
-  // }
   return (
     <div>
-      {/* <ul>
-        {" "}
-        {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul> */}
-      {/* <GestionarNotas></GestionarNotas> */}
-     
-      {/* <AppIntro></AppIntro> */}
-
-      <SplashScreen></SplashScreen>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/pagina1" element={<Pagina1 />} />
+        <Route path="/pagina2" element={<Pagina2 />} />
+        <Route path="/pagina3" element={<Pagina3 />} />
+        <Route path="/gestionarnotas" element={<GestionarNotas />} />
+      </Routes>
+    </Router>
 
     </div>
   );

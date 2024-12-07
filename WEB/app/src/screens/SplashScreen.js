@@ -1,21 +1,26 @@
-import { useEffect, useState } from 'react';
-import Style from '../stylesheets/SplashScreen.css';
+
+import '../stylesheets/SplashScreen.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SplashScreen({ navigation, isLoading }) {
   const [counter, setCounter] = useState(1);
+  const navigate = useNavigate(); // Hook para realizar la navegación
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCounter(prevCounter => {
         if (prevCounter === 1 && !isLoading) {
           clearInterval(interval);
-          navigation.navigate('Menu'); 
+          navigate('/menu'); 
         }
         return prevCounter - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval); 
-  }, [isLoading, navigation]);
+  }, [isLoading, navigate, navigation]);
 
   return (
     <div>
@@ -24,13 +29,14 @@ export default function SplashScreen({ navigation, isLoading }) {
         <div className="top-container">
           <h1 className="title">Bienvenido</h1>
         </div>
-        <p className="counter">Accediendo a tu portal político favorito...</p>
+        <p className="counter">Accediendo al sistema gestor de tareas de equipos pequeños...</p>
       </div>
     </div>
       </div>
 
   );
 }
+
 
 // const styles = StyleSheet.create({
 //   background: {
