@@ -16,6 +16,7 @@ function Pagina2() {
 function Pagina3() {
   return <h2>Página 3</h2>;
 }
+//pruebacommit
 
 const App = () => {
 
