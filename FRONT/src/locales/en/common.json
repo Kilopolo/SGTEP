@@ -1,0 +1,7 @@
+{
+  "description": "Small Team Task Management System",
+  "welcome": "Hello SGTEP 🚀",
+  "language": "Current language: {{lang}}",
+  "changeToSpanish": "Change to Spanish",
+  "changeToEnglish": "Change to English"
+}
