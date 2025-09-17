@@ -7,11 +7,11 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -60,7 +60,11 @@ export default function Login() {
           Entrar
         </button>
         {message && (
-          <p className={`text-center text-sm mt-2 ${res?.token ? "text-green-500" : "text-red-500"}`}>
+          <p
+            className={`text-center text-sm mt-2 ${
+              message.includes("exitoso") ? "text-green-500" : "text-red-500"
+            }`}
+          >
             {message}
           </p>
         )}
