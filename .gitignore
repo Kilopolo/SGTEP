@@ -19,6 +19,7 @@ ehthumbs.db
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*
 
 # Logs
 npm-debug.log*
@@ -78,3 +79,4 @@ dependency-reduced-pom.xml
 *.pydevproject
 *.buildpath
 *.launch
+
