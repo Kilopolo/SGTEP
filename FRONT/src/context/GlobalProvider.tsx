@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GlobalContext } from "./GlobalContext";
-import i18n from "../i18n";
+import i18n from "../locales/i18n";
 import type { ReactNode } from "react";
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
