@@ -1,0 +1,65 @@
+1️⃣ Mejora la gestión de usuarios
+
+✅ Añadir roles: admin, usuario normal, etc.
+
+✅ Permitir recuperación de contraseña (email + token).
+
+✅ Confirmación de email al registrarse.
+
+✅ Validaciones más estrictas: passwords más seguros, emails correctos, username único.
+
+2️⃣ Gestión de notas/tareas
+
+Implementa CRUD completo con permisos: que un usuario solo vea y edite sus propias notas.
+
+Añade filtros, búsquedas y paginación en la API.
+
+Considera un sistema de etiquetas o categorías para las notas.
+
+3️⃣ Seguridad
+
+Añade rate limiting para endpoints sensibles.
+
+Usa helmet y otras medidas de seguridad HTTP en Express.
+
+Considera encriptación de datos sensibles en la base de datos.
+
+Revisa tu JWT secret y duraciones de token.
+
+4️⃣ UX / Frontend
+
+Integrar dashboard real con visualización de notas.
+
+Añadir dark/light mode (ya tienes algo de esto con tu GlobalProvider).
+
+Mostrar mensajes de error y éxito consistentes en todas las acciones.
+
+Mejorar validaciones de formularios en frontend.
+
+5️⃣ Deploy y DevOps
+
+Configura entorno staging para probar antes de producción.
+
+Monitoreo de errores con Sentry o similar.
+
+Logs centralizados para el backend.
+
+Backups automáticos de MongoDB.
+
+6️⃣ Optimización
+
+Divide tu API en microservicios si crece mucho.
+
+Implementa caching con Redis si hay muchas lecturas.
+
+Optimiza queries MongoDB con índices adecuados.
+
+7️⃣ Extras
+
+WebSockets o Realtime updates para notas compartidas.
+
+Integración con servicios externos (Google Drive, Slack, etc.).
+
+Internacionalización completa (ya tienes i18n parcialmente).
+
+💡 Tip: Antes de añadir nuevas features, asegúrate de tener tests automáticos para backend y frontend. Esto te da seguridad cuando tu app crezca.
