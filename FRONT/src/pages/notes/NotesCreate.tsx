@@ -1,14 +1,25 @@
 import { useState } from "react";
+import { createNote } from "../../services/api";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function NotesCreate() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Nota creada:", { title, content });
-    setTitle("");
-    setContent("");
+    try {
+      await createNote({ title, content });
+      toast.success("Nota creada correctamente");
+      setTitle("");
+      setContent("");
+      navigate("/notes"); // redirigir a la lista de notas
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al crear la nota");
+    }
   };
 
   return (
@@ -24,14 +35,19 @@ export default function NotesCreate() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full p-2 border rounded"
+          required
         />
         <textarea
           placeholder="Contenido"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="w-full p-2 border rounded h-32"
+          required
         />
-        <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        >
           Guardar Nota
         </button>
       </form>
