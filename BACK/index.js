@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import notesRoutes from "./routes/notes.js";
 import authRoutes from "./routes/auth.js";
-
+// Ejemplo de ruta protegida
+import { protect } from "./middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -28,8 +29,15 @@ app.use(cors({
 app.use("/notes", notesRoutes);
 app.use("/auth", authRoutes);
 
-// Ejemplo de ruta protegida
-import { protect } from "./middleware/authMiddleware.js";
+
+app.get("/ping", (req, res) => {
+  // Simular retraso de 10 segundos
+  setTimeout(() => {
+    res.json({ message: "pong" });
+  }, 10000); // 10000 ms = 10s
+});
+
+
 app.get("/profile", protect, (req, res) => {
   res.json({ message: `Hola usuario ${req.user.id}` });
 });

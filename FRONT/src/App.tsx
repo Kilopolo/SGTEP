@@ -7,8 +7,16 @@ import Home from "./pages/Home";
 import NotesCreate from "./pages/NotesCreate";
 import NotesView from "./pages/NotesView";
 import { GlobalProvider } from "./context/GlobalProvider";
+import LoadingScreen from "./components/LoadingScreen";
+import { useBackendStatus } from "./hooks/useBackendStatus";
 
 function App() {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const backendLoading = useBackendStatus(API_URL);
+
+  if (backendLoading) {
+    return <LoadingScreen />;
+  }
   return (
     <GlobalProvider>
       <Router>
