@@ -1,6 +1,6 @@
 // ----------------- NOTES -----------------
 export interface Note {
-  id?: string;
+  id?: string;       // Usamos directamente el de Mongo
   title: string;
   content: string;
   createdAt?: string;

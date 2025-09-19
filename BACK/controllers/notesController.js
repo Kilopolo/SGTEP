@@ -11,38 +11,37 @@ export const createNote = async (req, res) => {
   }
 };
 
-/**
- * Obtener todas las notas
- * @returns {Promise<Object[]>} - Notas guardadas en la base de datos
- */
 export const getNotes = async (req, res) => {
   try {
-    // Buscar todas las notas en la base de datos
     const notes = await Note.find();
-    // Devolver las notas encontradas
-    res.json(notes);
+
+    const formatted = notes.map((n) => ({
+      id: n._id.toString(),
+      title: n.title,
+      content: n.content,
+      createdAt: n.createdAt,
+      updatedAt: n.updatedAt,
+    }));
+
+    res.json(formatted);
   } catch (err) {
-    // Devolver un error si ocurre alguno
     res.status(500).json({ error: err.message });
   }
 };
 
-/**
- * Obtener una nota por su ID
- * @param {Object} req - request object
- * @param {Object} res - response object
- * @returns {Promise<Object>} - Nota encontrada en la base de datos
- */
 export const getNoteById = async (req, res) => {
   try {
-    // Buscar la nota por su ID en la base de datos
     const note = await Note.findById(req.params.id);
-    // Si no se encuentra la nota, devolver un error
     if (!note) return res.status(404).json({ error: "Nota no encontrada" });
-    // Devolver la nota encontrada
-    res.json(note);
+
+    res.json({
+      id: note._id.toString(),
+      title: note.title,
+      content: note.content,
+      createdAt: note.createdAt,
+      updatedAt: note.updatedAt,
+    });
   } catch (err) {
-    // Devolver un error si ocurre alguno
     res.status(500).json({ error: err.message });
   }
 };

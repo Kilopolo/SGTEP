@@ -10,8 +10,13 @@ export default function NotesList() {
   const navigate = useNavigate();
 
   const fetchNotes = async () => {
-    const data = await getNotes();
-    setNotes(data);
+    try {
+      const data: Note[] = await getNotes();
+      setNotes(data);
+    } catch (err) {
+      console.error("Error cargando notas", err);
+      toast.error("Error cargando notas");
+    }
   };
 
   useEffect(() => {
@@ -19,31 +24,40 @@ export default function NotesList() {
   }, []);
 
   const handleEdit = (note: Note) => {
-    navigate(`/notes/edit/${note.id}`);
+    navigate(`/notes/edit/${ note.id}`);
   };
 
-  const handleDelete = async (note: Note) => {
-    if (!note.id) return;
-    await deleteNote(note.id);
-    toast.success("Nota eliminada");
-    fetchNotes(); // refrescar lista
-  };
+const handleDelete = async (note: Note) => {
+  if (!note.id) return;
+  await deleteNote(note.id);
+  toast.success("Nota eliminada");
+  fetchNotes();
+};
 
   const handleShare = (note: Note) => {
-    navigate(`/notes/share/${note.id}`);
+    navigate(`/notes/share/${ note.id}`);
   };
 
   return (
-    <div className="space-y-4">
-      {notes.map((note) => (
-        <NoteCard
-          key={note.id}
-          note={note}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onShare={handleShare}
-        />
-      ))}
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+      <h2 className="text-2xl font-bold mb-4">Notas Guardadas</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {notes.length > 0 ? (
+          notes.map((note) => (
+            <NoteCard
+              key={ note.id}
+              note={note}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onShare={handleShare}
+            />
+          ))
+        ) : (
+          <p className="text-gray-600 dark:text-gray-300">
+            No tienes notas guardadas todavía.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

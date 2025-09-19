@@ -22,7 +22,7 @@ export default function Header() {
           <Link to="/register" className="hover:underline">{t("register")}</Link>
           <Link to="/home" className="hover:underline">{t("home")}</Link>
           <Link to="/notes/create" className="hover:underline">{t("createNote")}</Link>
-          <Link to="/notes/view" className="hover:underline">{t("viewNotes")}</Link>
+          <Link to="/notes" className="hover:underline">{t("viewNotes")}</Link>
 
           {/* Language switcher */}
           <button
@@ -60,7 +60,7 @@ export default function Header() {
           <Link to="/register" className="hover:underline">{t("register")}</Link>
           <Link to="/home" className="hover:underline">{t("home")}</Link>
           <Link to="/notes/create" className="hover:underline">{t("createNote")}</Link>
-          <Link to="/notes/view" className="hover:underline">{t("viewNotes")}</Link>
+          <Link to="/notes" className="hover:underline">{t("viewNotes")}</Link>
 
           <div className="flex justify-between items-center mt-3">
             {/* Language switcher */}
