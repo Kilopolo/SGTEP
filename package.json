@@ -1,0 +1,14 @@
+{
+  "name": "sgtep",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n BACK,FRONT -c blue,green \"cross-env NODE_ENV=development npm run dev --prefix BACK\" \"cross-env NODE_ENV=development npm run dev --prefix FRONT\"",
+    "dev:back": "npm run dev --prefix BACK",
+    "dev:front": "npm run dev --prefix FRONT",
+    "build": "npm run build --prefix FRONT"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.0.0"
+  }
+}
