@@ -4,11 +4,15 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import NotesCreate from "./pages/NotesCreate";
-import NotesView from "./pages/NotesView";
+import NotesCreate from "./pages/notes/NotesCreate";
+import NotesView from "./pages/notes/NotesView";
+import NotesEdit from "./pages/notes/NotesEdit";
+import NotesDelete from "./pages/notes/NotesDelete";
+import NotesShare from "./pages/notes/NotesShare";
 import { GlobalProvider } from "./context/GlobalProvider";
 import LoadingScreen from "./components/LoadingScreen";
 import { useBackendStatus } from "./hooks/useBackendStatus";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -18,19 +22,25 @@ function App() {
     return <LoadingScreen />;
   }
   return (
-    <GlobalProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/notes/create" element={<NotesCreate />} />
-          <Route path="/notes/view" element={<NotesView />} />
-        </Routes>
-      </Router>
-    </GlobalProvider>
+    <>
+      <Toaster position="top-right" />
+      <GlobalProvider>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/notes/create" element={<NotesCreate />} />
+            <Route path="/notes/view" element={<NotesView />} />
+        <Route path="/notes/edit/:id" element={<NotesEdit />} />
+        <Route path="/notes/delete/:id" element={<NotesDelete />} />
+        <Route path="/notes/share/:id" element={<NotesShare />} />
+          </Routes>
+        </Router>
+      </GlobalProvider>
+    </>
   );
 }
 

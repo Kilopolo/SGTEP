@@ -34,7 +34,8 @@ app.get("/ping", (req, res) => {
   // Simular retraso de 10 segundos
   setTimeout(() => {
     res.json({ message: "pong" });
-  }, 10000); // 10000 ms = 10s
+  // }, 10000); // 10000 ms = 10s
+    }, 10); // 10000 ms = 10s
 });
 
 

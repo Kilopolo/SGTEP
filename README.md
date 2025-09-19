@@ -31,6 +31,17 @@ La aplicación consta de las siguientes funcionalidades principales:
 3. **Editar Vistas**: Permite a los usuarios editar las vistas personalizadas existentes.
 4. **Borrar Vistas**: Permite a los usuarios eliminar vistas personalizadas.
 5. **Compartir Vistas**: Permite a los usuarios compartir sus vistas personalizadas con otros usuarios.
+### Internacionalización y Personalización
+
+1. **Cambio de idioma**: Soporte para múltiples idiomas (ej. Español / Inglés) usando i18next.
+2. **Modo oscuro y claro**: Los usuarios pueden alternar entre temas.
+
+### Otros
+
+1. **Ping/Health check**: Endpoint /ping y /api/health para verificar que el backend esté activo.
+2. **Split-tunneling friendly**: La app puede conectarse a MongoDB incluso si se usa VPN, configurando DNS públicos.
+3. **Front y Back deploy**: Frontend en Vercel, Backend en Render, con variables de entorno separadas.
+
 
 ---
 
