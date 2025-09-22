@@ -11,17 +11,18 @@ import NotesList from "./pages/notes/NotesList";
 import NotesDelete from "./pages/notes/NotesDelete";
 import NotesShare from "./pages/notes/NotesShare";
 import { GlobalProvider } from "./context/GlobalProvider";
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen from "./components/loadingScreen/LoadingScreen";
 import { useBackendStatus } from "./hooks/useBackendStatus";
 import { Toaster } from "react-hot-toast";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL;
-  const backendLoading = useBackendStatus(API_URL);
+  const { loading } = useBackendStatus(API_URL);
 
-  if (backendLoading) {
+  if (loading) {
     return <LoadingScreen />;
   }
+
   return (
     <>
       <Toaster position="top-right" />
@@ -36,9 +37,9 @@ function App() {
             <Route path="/notes/create" element={<NotesCreate />} />
             <Route path="/notes/view/:id" element={<NotesViewNote />} />
             <Route path="/notes" element={<NotesList />} />
-        <Route path="/notes/edit/:id" element={<NotesEdit />} />
-        <Route path="/notes/delete/:id" element={<NotesDelete />} />
-        <Route path="/notes/share/:id" element={<NotesShare />} />
+            <Route path="/notes/edit/:id" element={<NotesEdit />} />
+            <Route path="/notes/delete/:id" element={<NotesDelete />} />
+            <Route path="/notes/share/:id" element={<NotesShare />} />
           </Routes>
         </Router>
       </GlobalProvider>
