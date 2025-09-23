@@ -12,27 +12,29 @@ export default function DinoGame() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const isMobile = window.innerWidth < 600;
-    const {
-      GAME_WIDTH,
-      GAME_HEIGHT,
-      PLAYER_WIDTH,
-      PLAYER_HEIGHT,
-      MAX_JUMP_HEIGHT,
-      MIN_JUMP_HEIGHT,
-      GROUND_WIDTH,
-      GROUND_HEIGHT,
-      GAME_SPEED,
-      GAME_DIFFICULTY_SPEED_START,
-      GAME_DIFFICULTY_SPEED_INCREMENT,
-      CACTI_CONFIG,
-    } = getGameConstants(isMobile ? 400 : 800, isMobile ? 100 : 200);
+const isMobile = window.innerWidth < 799;
+const MOBILE_GAME_WIDTH = Math.max(window.innerWidth * 0.8, 200); // ancho mínimo 400px para móviles
 
-    let scaleRatio = 1;
+const {
+  GAME_WIDTH,
+  GAME_HEIGHT,
+  PLAYER_WIDTH,
+  PLAYER_HEIGHT,
+  MAX_JUMP_HEIGHT,
+  MIN_JUMP_HEIGHT,
+  GROUND_WIDTH,
+  GROUND_HEIGHT,
+  GAME_SPEED,
+  GAME_DIFFICULTY_SPEED_START,
+  GAME_DIFFICULTY_SPEED_INCREMENT,
+  CACTI_CONFIG,
+} = getGameConstants(isMobile ? MOBILE_GAME_WIDTH : 800); // usa 800 en desktop
+
+
+    let scaleRatio: number;
     let prevTime: number | null = null;
     let gameSpeed = GAME_DIFFICULTY_SPEED_START;
     let gameOver = false;
@@ -51,50 +53,89 @@ export default function DinoGame() {
       const maxJumpHeightInGame = MAX_JUMP_HEIGHT * scaleRatio;
 
       player = new Player(
-        ctx,
+        ctx!,
         playerWidthInGame,
         playerHeightInGame,
         minJumpHeightInGame,
         maxJumpHeightInGame,
         scaleRatio
       );
+      ground = new Ground(
+        ctx!,
+        GROUND_WIDTH * scaleRatio,
+        GROUND_HEIGHT * scaleRatio,
+        GAME_SPEED,
+        scaleRatio
+      );
 
-      const groundWidthInGame = GROUND_WIDTH * scaleRatio;
-      const groundHeightInGame = GROUND_HEIGHT * scaleRatio;
-      ground = new Ground(ctx, groundWidthInGame, groundHeightInGame, GAME_SPEED, scaleRatio);
-
-      const cactiImages = CACTI_CONFIG.map((c) => {
+      const cactiImages = CACTI_CONFIG.map((cacti) => {
         const image = new Image();
-        image.src = c.image;
+        image.src = cacti.image;
         return {
           image,
-          width: c.width * scaleRatio,
-          height: c.height * scaleRatio,
+          width: cacti.width * scaleRatio,
+          height: cacti.height * scaleRatio,
         };
       });
 
-      cactiController = new CactiController(ctx, canvas, cactiImages, scaleRatio, GAME_SPEED);
-      score = new Score(ctx, scaleRatio);
-    }
-
-    function getScaleRatio() {
-      const screenHeight = Math.min(window.innerHeight, document.documentElement.clientHeight);
-      const screenWidth = Math.min(window.innerWidth, document.documentElement.clientWidth);
-      return screenWidth / screenHeight < GAME_WIDTH / GAME_HEIGHT
-        ? screenWidth / GAME_WIDTH
-        : screenHeight / GAME_HEIGHT;
+      cactiController = new CactiController(
+        ctx!,
+        canvas!,
+        cactiImages,
+        scaleRatio,
+        GAME_SPEED
+      );
+      score = new Score(ctx!, scaleRatio);
     }
 
     function setScreen() {
-      scaleRatio = getScaleRatio();
-      canvas.width = GAME_WIDTH * scaleRatio;
-      canvas.height = GAME_HEIGHT * scaleRatio;
+      const screenHeight = Math.min(
+        window.innerHeight,
+        document.documentElement.clientHeight
+      );
+      const screenWidth = Math.min(
+        window.innerWidth,
+        document.documentElement.clientWidth
+      );
+
+      scaleRatio =
+        screenWidth / GAME_WIDTH < screenHeight / GAME_HEIGHT
+          ? screenWidth / GAME_WIDTH
+          : screenHeight / GAME_HEIGHT;
+
+      canvas!.width = GAME_WIDTH * scaleRatio;
+      canvas!.height = GAME_HEIGHT * scaleRatio;
+
       createSprites();
     }
 
+    function resetListeners() {
+      window.addEventListener("keyup", reset, { once: true });
+      window.addEventListener("touchstart", reset, { once: true });
+      window.addEventListener("mousedown", reset, { once: true });
+    }
+
+    function showText(text: string) {
+      const fontSize = 40 * scaleRatio;
+      ctx!.font = `${fontSize}px Verdana`;
+      ctx!.fillStyle = "grey";
+      ctx!.fillText(text, canvas!.width / 14, canvas!.height / 2);
+    }
+
+    function setupGameReset() {
+      if (!restartEvent) {
+        restartEvent = true;
+        setTimeout(() => resetListeners(), 1000);
+      }
+    }
+
+    function updateGameSpeed(frameTimeDelta: number) {
+      gameSpeed += frameTimeDelta * GAME_DIFFICULTY_SPEED_INCREMENT;
+    }
+
     function clearScreen() {
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx!.fillStyle = "white";
+      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
     }
 
     function reset() {
@@ -107,38 +148,15 @@ export default function DinoGame() {
       gameSpeed = GAME_DIFFICULTY_SPEED_START;
     }
 
-    function resetListeners() {
-      window.addEventListener("keyup", reset, { once: true });
-      window.addEventListener("touchstart", reset, { once: true });
-    }
-
-    function showText(text: string) {
-      const fontSize = 40 * scaleRatio;
-      ctx.font = `${fontSize}px Verdana`;
-      ctx.fillStyle = "grey";
-      ctx.fillText(text, canvas.width / 14, canvas.height / 2);
-    }
-
-    function setupGameReset() {
-      if (!restartEvent) {
-        restartEvent = true;
-        setTimeout(resetListeners, 1000);
-      }
-    }
-
-    function updateGameSpeed(delta: number) {
-      gameSpeed += delta * GAME_DIFFICULTY_SPEED_INCREMENT;
-    }
-
     function gameLoop(frameTime: number) {
       if (prevTime === null) {
         prevTime = frameTime;
         requestAnimationFrame(gameLoop);
         return;
       }
+
       const frameTimeDelta = frameTime - prevTime;
       prevTime = frameTime;
-
       clearScreen();
 
       if (!gameOver && !waitingToStart) {
@@ -156,8 +174,8 @@ export default function DinoGame() {
       }
 
       player.draw();
-      ground.draw();
       cactiController.draw();
+      ground.draw();
       score.draw();
 
       if (gameOver) showText("Tap Screen or Press Space To Start");
