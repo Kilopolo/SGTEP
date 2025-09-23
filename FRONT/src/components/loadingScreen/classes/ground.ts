@@ -27,7 +27,7 @@ export class Ground {
 		this.posY = this.canvas.height - this.height;
 
 		this.groundImage = new Image();
-		this.groundImage.src = "/static/media/imgs/ground.png";
+		this.groundImage.src = "/imgs/ground.png";
 	}
 
 	draw() {

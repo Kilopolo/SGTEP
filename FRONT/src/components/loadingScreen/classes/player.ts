@@ -43,15 +43,15 @@ export class Player {
 		this.initY = this.posY;
 
 		this.standingImage = new Image();
-		this.standingImage.src = "/static/media/imgs/standing_still.png";
+		this.standingImage.src = "/imgs/standing_still.png";
 
 		this.image = this.standingImage;
 
 		const dinoRunImage1 = new Image();
-		dinoRunImage1.src = "/static/media/imgs/dino_run1.png";
+		dinoRunImage1.src = "/imgs/dino_run1.png";
 
 		const dinoRunImage2 = new Image();
-		dinoRunImage2.src = "/static/media/imgs/dino_run2.png";
+		dinoRunImage2.src = "/imgs/dino_run2.png";
 
 		this.dinoRunImages.push(dinoRunImage1);
 		this.dinoRunImages.push(dinoRunImage2);

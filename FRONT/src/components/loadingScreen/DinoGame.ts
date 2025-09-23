@@ -2,22 +2,27 @@ import { CactiController } from "./classes/cacti-controller";
 import { Ground } from "./classes/ground";
 import { Player } from "./classes/player";
 import { Score } from "./classes/score";
-import {
-	CACTI_CONFIG,
-	GAME_DIFFICULTY_SPEED_INCREMENT,
-	GAME_DIFFICULTY_SPEED_START,
-	GAME_HEIGHT,
-	GAME_SPEED,
-	GAME_WIDTH,
-	GROUND_HEIGHT,
-	GROUND_WIDTH,
-	MAX_JUMP_HEIGHT,
-	MIN_JUMP_HEIGHT,
-	PLAYER_HEIGHT,
-	PLAYER_WIDTH,
-} from "./constants";
+
 import "./style.css";
 
+import { getGameConstants } from "./constants";
+
+// responsive según pantalla
+const isMobile = window.innerWidth < 600;
+const {
+  GAME_WIDTH,
+  GAME_HEIGHT,
+  PLAYER_WIDTH,
+  PLAYER_HEIGHT,
+  MAX_JUMP_HEIGHT,
+  MIN_JUMP_HEIGHT,
+  GROUND_WIDTH,
+  GROUND_HEIGHT,
+  GAME_SPEED,
+  GAME_DIFFICULTY_SPEED_START,
+  GAME_DIFFICULTY_SPEED_INCREMENT,
+  CACTI_CONFIG,
+} = getGameConstants(isMobile ? 400 : 800, isMobile ? 100 : 200);
 const canvas = document.querySelector<HTMLCanvasElement>("#game")!;
 if (!canvas) {
 	throw new Error("Canvas not found");

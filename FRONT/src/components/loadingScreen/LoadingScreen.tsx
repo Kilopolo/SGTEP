@@ -1,4 +1,4 @@
-
+import DinoGame from "./DinoGame.tsx";
 
 export default function LoadingScreen() {
   return (
@@ -10,7 +10,9 @@ export default function LoadingScreen() {
             Mientras esperas, juega un rato 🦖
           </p>
         </div>
-        <script type="module" src="/src/DinoGame.ts"></script>
+        <div className="w-[800px] h-[200px] mx-auto border">
+          <DinoGame />
+        </div>
       </div>
     </div>
   );
