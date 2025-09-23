@@ -11,7 +11,7 @@ export function getGameConstants(GAME_WIDTH: number) {
   const MIN_JUMP_HEIGHT = GAME_HEIGHT * 0.75;
 
   // Suelo
-  const GROUND_WIDTH = GAME_WIDTH * 3;
+  const GROUND_WIDTH = GAME_WIDTH ;
   const GROUND_HEIGHT = GAME_HEIGHT * 0.12;
 
   // Velocidad y dificultad
