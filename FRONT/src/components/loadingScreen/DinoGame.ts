@@ -22,7 +22,7 @@ const {
   GAME_DIFFICULTY_SPEED_START,
   GAME_DIFFICULTY_SPEED_INCREMENT,
   CACTI_CONFIG,
-} = getGameConstants(isMobile ? 400 : 800, isMobile ? 100 : 200);
+} = getGameConstants(isMobile ? 400 : 800);
 const canvas = document.querySelector<HTMLCanvasElement>("#game")!;
 if (!canvas) {
 	throw new Error("Canvas not found");
