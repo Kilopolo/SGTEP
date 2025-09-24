@@ -11,10 +11,13 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(form);
-    const res = await registerUser(form);
-    console.log(res.message);
-    setMessage(res?.message || "Error en el registro");
+    try {
+      const res = await registerUser(form);
+      setMessage(res.message || "Error en el registro ❌");
+    } catch (err) {
+      console.error(err);
+      setMessage("Ocurrió un error en el registro ❌");
+    }
   };
 
   return (
@@ -26,7 +29,7 @@ export default function Register() {
         <h2 className="text-xl font-bold text-center">Crear Cuenta</h2>
         <input
           type="text"
-          name="username" // <-- cambiar "name" a "username"
+          name="username"
           placeholder="Nombre"
           value={form.username}
           onChange={handleChange}

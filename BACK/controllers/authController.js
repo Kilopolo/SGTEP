@@ -19,7 +19,7 @@ export const register = async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       // Si el usuario ya existe, devolver un error
-      return res.status(400).json({ error: "Usuario ya registrado" });
+      return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
     // Encriptar la contraseña
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
     res.status(201).json({ message: "Usuario creado correctamente" });
   } catch (err) {
     // Devolver una respuesta con un error si ocurre alguno
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -53,7 +53,7 @@ export const login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ error: "Usuario no encontrado" });
+        .json({ message: "Usuario no encontrado" });
     }
 
     // Compare password
@@ -61,7 +61,7 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ error: "Contraseña incorrecta" });
+        .json({ message: "Contraseña incorrecta" });
     }
 
     // Create JWT
@@ -77,6 +77,6 @@ export const login = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 };

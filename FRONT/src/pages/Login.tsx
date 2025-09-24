@@ -13,18 +13,13 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const res = await loginUser(form);
 
       if (res.token) {
-        // Guardamos el JWT en localStorage
         localStorage.setItem("token", res.token);
-
-        // Redirigir al dashboard
-        navigate("/home"); // Cambia "/home" por la ruta de tu dashboard
+        navigate("/home");
       } else {
-        // Mostrar mensaje de error
         setMessage(res.message || "Usuario o contraseña incorrectos ❌");
       }
     } catch (err) {
@@ -62,7 +57,9 @@ export default function Login() {
         {message && (
           <p
             className={`text-center text-sm mt-2 ${
-              message.includes("exitoso") ? "text-green-500" : "text-red-500"
+              message.includes("correcta") || message.includes("exitos")
+                ? "text-green-500"
+                : "text-red-500"
             }`}
           >
             {message}
