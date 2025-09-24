@@ -32,23 +32,28 @@ export async function loginUser(data: {
 
 // ----------------- NOTES -----------------
 
-export async function getNotes(): Promise<Note[]> {
-  const { data } = await axios.get<Note[]>(`${API_URL}/notes`);
-  return data;
-}
+export const getNotes = async () => {
+  const token = localStorage.getItem("token");
+  const res = await axios.get(`${API_URL}/notes`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
 
 export async function getNoteById(id: string): Promise<Note> {
   const { data } = await axios.get<Note>(`${API_URL}/notes/${id}`);
   return data;
 }
 
-export async function createNote(payload: {
-  title: string;
-  content: string;
-}): Promise<Note> {
-  const { data } = await axios.post<Note>(`${API_URL}/notes`, payload);
-  return data;
-}
+export const createNote = async (note: { title: string; content: string }) => {
+  const token = localStorage.getItem("token");
+  console.log("Enviando nota:", note, "con token:", token);
+
+  const res = await axios.post(`${API_URL}/notes`, note, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
 
 export async function updateNote(
   id: string,

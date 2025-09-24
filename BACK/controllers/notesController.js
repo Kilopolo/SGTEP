@@ -2,10 +2,12 @@ import { Note } from "../models/Note.js";
 
 // Crear nota
 export const createNote = async (req, res) => {
+  console.log("req.body:", req.body);
+  console.log("req.user:", req.user);
   try {
     const note = new Note({
       ...req.body,
-      userId: req.user.id
+      userId: req.user.id,
     });
     await note.save();
     res.status(201).json(note);
@@ -15,15 +17,18 @@ export const createNote = async (req, res) => {
 };
 
 export const getNotes = async (req, res) => {
+  console.log("Obteniendo notas de userId:", req.user?.id);
   try {
     const notes = await Note.find({ userId: req.user.id });
-    res.json(notes.map(n => ({
-      id: n._id.toString(),
-      title: n.title,
-      content: n.content,
-      createdAt: n.createdAt,
-      updatedAt: n.updatedAt,
-    })));
+    res.json(
+      notes.map((n) => ({
+        id: n._id.toString(),
+        title: n.title,
+        content: n.content,
+        createdAt: n.createdAt,
+        updatedAt: n.updatedAt,
+      }))
+    );
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -55,7 +60,9 @@ export const getNoteById = async (req, res) => {
 export const updateNote = async (req, res) => {
   try {
     // Buscar la nota por su ID en la base de datos
-    const note = await Note.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const note = await Note.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     // Si no se encuentra la nota, devolver un error
     if (!note) return res.status(404).json({ error: "Nota no encontrada" });
     // Devolver la nota actualizada

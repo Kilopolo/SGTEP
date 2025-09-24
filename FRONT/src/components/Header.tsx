@@ -1,13 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGlobal } from "../context/useGlobal";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Home } from "lucide-react";
+import i18n from "../locales/i18n";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, theme, toggleTheme } = useGlobal();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <header className="p-4 bg-white text-black dark:bg-gray-900 dark:text-white shadow-md">
@@ -17,12 +26,43 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className="hover:underline">{t("landing")}</Link>
-          <Link to="/login" className="hover:underline">{t("login")}</Link>
-          <Link to="/register" className="hover:underline">{t("register")}</Link>
-          <Link to="/home" className="hover:underline">{t("home")}</Link>
-          <Link to="/notes/create" className="hover:underline">{t("createNote")}</Link>
-          <Link to="/notes" className="hover:underline">{t("viewNotes")}</Link>
+          {!token ? (
+            <>
+              <Link to="/" className="hover:underline">
+                {i18n.t("landing")}
+              </Link>
+              <Link to="/login" className="hover:underline">
+                {i18n.t("login")}
+              </Link>
+              <Link to="/register" className="hover:underline">
+                {i18n.t("register")}
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/home"
+                className="hover:underline flex items-center gap-1"
+              >
+                <Home size={18} /> {i18n.t("home")}
+              </Link>
+
+              {/* CRUD de notas */}
+              <Link to="/notes/create" className="hover:underline">
+                {t("createNote")}
+              </Link>
+              <Link to="/notes" className="hover:underline">
+                {t("viewNotes")}
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+              >
+                {i18n.t("logout")}
+              </button>
+            </>
+          )}
 
           {/* Language switcher */}
           <button
@@ -55,12 +95,34 @@ export default function Header() {
       {/* Mobile nav */}
       {isOpen && (
         <nav className="md:hidden mt-4 flex flex-col space-y-3">
-          <Link to="/" className="hover:underline">{t("landing")}</Link>
-          <Link to="/login" className="hover:underline">{t("login")}</Link>
-          <Link to="/register" className="hover:underline">{t("register")}</Link>
-          <Link to="/home" className="hover:underline">{t("home")}</Link>
-          <Link to="/notes/create" className="hover:underline">{t("createNote")}</Link>
-          <Link to="/notes" className="hover:underline">{t("viewNotes")}</Link>
+          {!token ? (
+            <>
+              <Link to="/" className="hover:underline">
+                {i18n.t("landing")}
+              </Link>
+              <Link to="/login" className="hover:underline">
+                {i18n.t("login")}
+              </Link>
+              <Link to="/register" className="hover:underline">
+                {i18n.t("register")}
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/home"
+                className="hover:underline flex items-center gap-1"
+              >
+                <Home size={18} /> {i18n.t("home")}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+              >
+                {t("logout") || "Logout"}
+              </button>
+            </>
+          )}
 
           <div className="flex justify-between items-center mt-3">
             {/* Language switcher */}

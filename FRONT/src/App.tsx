@@ -14,6 +14,7 @@ import { GlobalProvider } from "./context/GlobalProvider";
 import LoadingScreen from "./components/loadingScreen/LoadingScreen";
 import { useBackendStatus } from "./hooks/useBackendStatus";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -31,16 +32,69 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path="/" element={<Landing />} />
+            {/* Rutas públicas */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/notes/create" element={<NotesCreate />} />
-            <Route path="/notes/view/:id" element={<NotesViewNote />} />
-            <Route path="/notes" element={<NotesList />} />
-            <Route path="/notes/edit/:id" element={<NotesEdit />} />
-            <Route path="/notes/delete/:id" element={<NotesDelete />} />
-            <Route path="/notes/share/:id" element={<NotesShare />} />
+            <Route path="/" element={<Landing />} />
+
+            {/* Rutas protegidas */}
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/notes/create"
+              element={
+                <ProtectedRoute>
+                  <NotesCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                <ProtectedRoute>
+                  <NotesList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes/view/:id"
+              element={
+                <ProtectedRoute>
+                  <NotesViewNote />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <NotesEdit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes/delete/:id"
+              element={
+                <ProtectedRoute>
+                  <NotesDelete />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes/share/:id"
+              element={
+                <ProtectedRoute>
+                  <NotesShare />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
       </GlobalProvider>

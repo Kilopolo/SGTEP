@@ -3,5 +3,10 @@
   "welcome": "Hello SGTEP 🚀",
   "language": "Current language: {{lang}}",
   "changeToSpanish": "Change to Spanish",
-  "changeToEnglish": "Change to English"
+  "changeToEnglish": "Change to English",
+  "register": "Register",
+  "login": "Login",
+  "logout": "Logout",
+  "home": "Home",
+  "landing": "Landing Page"
 }

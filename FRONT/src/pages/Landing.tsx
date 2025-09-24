@@ -37,28 +37,6 @@ export default function Landing() {
         </Link>
       </div>
 
-      {/* Cambiar idioma */}
-      {/* <div className="space-x-2">
-        <button
-          onClick={() => setLanguage("es")}
-          className={`px-3 py-1 rounded ${
-            language === "es" ? "bg-white text-blue-600" : "bg-gray-700 text-white"
-          }`}
-        >
-          {i18n.t("changeToSpanish")}
-        </button>
-        <button
-          onClick={() => setLanguage("en")}
-          className={`px-3 py-1 rounded ${
-            language === "en" ? "bg-white text-blue-600" : "bg-gray-700 text-white"
-          }`}
-        >
-          {i18n.t("changeToEnglish")}
-        </button>
-      </div> */}
-
-      {/* Mostrar idioma actual */}
-      <p className="mt-4 text-sm">{i18n.t("language", { lang: language })}</p>
     </div>
   );
 }

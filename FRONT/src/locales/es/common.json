@@ -3,5 +3,10 @@
   "language": "Idioma actual: {{lang}}",
   "changeToSpanish": "Cambiar a Español",
   "changeToEnglish": "Cambiar a Inglés",
-  "description": "Sistema de Gestión de Tareas en Equipos Pequeños"
+  "description": "Sistema de Gestión de Tareas en Equipos Pequeños",
+  "register": "Registrarse",
+  "login": "Iniciar Sesión",  
+  "logout": "Cerrar Sesión",
+  "home": "Inicio",
+  "landing": "Página Principal"
 }
