@@ -49,13 +49,25 @@ export const getNoteById = async (req, res) => {
   console.log("[GET NOTE] req.params.id:", req.params.id);
 
   try {
+    //encontrar nota
     const note = await Note.findById(req.params.id);
     if (!note) {
       console.log("[GET NOTE] Nota no encontrada");
       return res.status(404).json({ error: "Nota no encontrada" });
     }
-
     console.log("[GET NOTE] Nota encontrada:", note);
+
+    // Permisos
+    const isOwner = note.userId.toString() === req.user.id;
+    const isShared = note.sharedWith.some((u) => u.toString() === req.user.id);
+
+    if (!isOwner && !isShared) {
+      return res
+        .status(403)
+        .json({ error: "No tienes permiso para ver esta nota" });
+    }
+
+    //respuesta
     res.json({
       id: note._id.toString(),
       title: note.title,
@@ -81,7 +93,9 @@ export const updateNote = async (req, res) => {
 
     // Solo el dueño puede actualizar
     if (note.userId.toString() !== req.user.id) {
-      return res.status(403).json({ error: "No tienes permiso para editar esta nota" });
+      return res
+        .status(403)
+        .json({ error: "No tienes permiso para editar esta nota" });
     }
 
     note.title = req.body.title || note.title;
@@ -109,11 +123,13 @@ export const deleteNote = async (req, res) => {
 
     // Solo el dueño puede borrar
     if (note.userId.toString() !== req.user.id) {
-      return res.status(403).json({ error: "No tienes permiso para borrar esta nota" });
+      return res
+        .status(403)
+        .json({ error: "No tienes permiso para borrar esta nota" });
     }
 
-     await Note.findByIdAndDelete(req.params.id); 
-     
+    await Note.findByIdAndDelete(req.params.id);
+
     console.log("[DELETE] Nota eliminada:", note._id.toString());
 
     res.json({ message: "Nota eliminada correctamente" });
@@ -125,8 +141,10 @@ export const deleteNote = async (req, res) => {
 
 // Compartir nota
 export const shareNote = async (req, res) => {
-  console.log("[SHARE] req.params.id:", req.params.id);
-  console.log("[SHARE] req.body.email:", req.body.email);
+  const { id } = req.params; // nota
+  const { targetUserId } = req.body; // usuario con quien compartir
+  console.log("[SHARE] req.params.id:", id);
+  console.log("[SHARE] req.body.email:", targetUserId.email);
   console.log("[SHARE] req.user:", req.user);
 
   try {
@@ -135,23 +153,19 @@ export const shareNote = async (req, res) => {
 
     // Solo el dueño puede compartir
     if (note.userId.toString() !== req.user.id) {
-      return res.status(403).json({ error: "No tienes permiso para compartir esta nota" });
+      return res
+        .status(403)
+        .json({ error: "No tienes permiso para compartir esta nota" });
+    }
+    // Añadir usuario si no está ya en sharedWith
+    if (!note.sharedWith.includes(targetUserId)) {
+      note.sharedWith.push(targetUserId);
+      await note.save();
+      console.log("[SHARE] Nota compartida con:", targetUserId.email);
     }
 
-    const targetUser = await User.findOne({ email: req.body.email });
-    if (!targetUser) return res.status(404).json({ error: "Usuario destinatario no encontrado" });
 
-    // Aquí podemos duplicar la nota para el otro usuario
-    const sharedNote = new Note({
-      title: note.title,
-      content: note.content,
-      userId: targetUser._id,
-    });
 
-    await sharedNote.save();
-    console.log("[SHARE] Nota compartida con:", targetUser.email);
-
-    res.json({ message: `Nota compartida con ${targetUser.email}` });
   } catch (err) {
     console.error("[SHARE] Error:", err.message);
     res.status(400).json({ error: err.message });

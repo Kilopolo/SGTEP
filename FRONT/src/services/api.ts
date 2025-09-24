@@ -95,3 +95,20 @@ export async function deleteNote(id: string): Promise<{ message: string }> {
   );
   return data;
 }
+
+export async function shareNote(
+  id: string,
+  targetUserId: string
+): Promise<{ message: string }> {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No hay token de autenticación");
+
+  const { data } = await axios.post<{ message: string }>(
+    `${API_URL}/notes/${id}/share`,
+    { targetUserId },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
+  return data;
+}
+
