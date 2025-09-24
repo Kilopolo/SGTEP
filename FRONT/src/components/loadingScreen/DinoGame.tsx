@@ -8,32 +8,31 @@ import "./style.css";
 
 export default function DinoGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  let animationId: number;
-  
+  // let animationId: number;
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-const isMobile = window.innerWidth < 799;
-const MOBILE_GAME_WIDTH = Math.max(window.innerWidth * 0.8, 200); // ancho mínimo 400px para móviles
+    const isMobile = window.innerWidth < 799;
+    const MOBILE_GAME_WIDTH = Math.max(window.innerWidth * 0.8, 200); // ancho mínimo 400px para móviles
 
-const {
-  GAME_WIDTH,
-  GAME_HEIGHT,
-  PLAYER_WIDTH,
-  PLAYER_HEIGHT,
-  MAX_JUMP_HEIGHT,
-  MIN_JUMP_HEIGHT,
-  GROUND_WIDTH,
-  GROUND_HEIGHT,
-  GAME_SPEED,
-  GAME_DIFFICULTY_SPEED_START,
-  GAME_DIFFICULTY_SPEED_INCREMENT,
-  CACTI_CONFIG,
-} = getGameConstants(isMobile ? MOBILE_GAME_WIDTH : 800); // usa 800 en desktop
-
+    const {
+      GAME_WIDTH,
+      GAME_HEIGHT,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+      MAX_JUMP_HEIGHT,
+      MIN_JUMP_HEIGHT,
+      GROUND_WIDTH,
+      GROUND_HEIGHT,
+      GAME_SPEED,
+      GAME_DIFFICULTY_SPEED_START,
+      GAME_DIFFICULTY_SPEED_INCREMENT,
+      CACTI_CONFIG,
+    } = getGameConstants(isMobile ? MOBILE_GAME_WIDTH : 800); // usa 800 en desktop
 
     let scaleRatio: number;
     let prevTime: number | null = null;
@@ -182,12 +181,12 @@ const {
       if (gameOver) showText("Tap Screen or Press Space To Start");
       if (waitingToStart) showText("Tap Screen or Press Space To Start");
 
-      animationId = requestAnimationFrame(gameLoop);
+      requestAnimationFrame(gameLoop);
     }
 
     setScreen();
     resetListeners();
-    animationId = requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop);
 
     window.addEventListener("resize", setScreen);
     window.addEventListener("orientationchange", setScreen);
@@ -195,15 +194,15 @@ const {
     return () => {
       window.removeEventListener("resize", setScreen);
       window.removeEventListener("orientationchange", setScreen);
-      	// mouse
-    window.removeEventListener("mousedown", () => {});
-    window.removeEventListener("mouseup", () => {});
-    // touch
-    window.removeEventListener("touchstart", () => {});
-    window.removeEventListener("touchend", () => {});
-    // keyboard
-    window.removeEventListener("keydown", () => {});
-    window.removeEventListener("keyup", () => {});
+      // mouse
+      window.removeEventListener("mousedown", () => {});
+      window.removeEventListener("mouseup", () => {});
+      // touch
+      window.removeEventListener("touchstart", () => {});
+      window.removeEventListener("touchend", () => {});
+      // keyboard
+      window.removeEventListener("keydown", () => {});
+      window.removeEventListener("keyup", () => {});
     };
   }, []);
 

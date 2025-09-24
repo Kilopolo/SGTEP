@@ -11,7 +11,7 @@ export default function Landing() {
     return null;
   }
 
-  const { language } = context;
+  // const { language } = context;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 text-white">

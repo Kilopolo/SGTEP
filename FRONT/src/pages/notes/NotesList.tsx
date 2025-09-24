@@ -11,7 +11,7 @@ export default function NotesList() {
 
   const fetchNotes = async () => {
     try {
-      const data: Note[] = await getNotes();
+      const data = (await getNotes()) as Note[];
       setNotes(data);
     } catch (err) {
       console.error("Error cargando notas", err);
