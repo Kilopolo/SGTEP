@@ -20,7 +20,8 @@ function App() {
   const { loading } = useBackendStatus(API_URL);
 
   if (loading) {
-    return <LoadingScreen />;
+    console.log("Cargando...");
+    return <LoadingScreen {...{ isLoading: loading }} />;
   }
 
   return (

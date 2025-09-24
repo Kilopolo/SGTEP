@@ -63,3 +63,5 @@ Integración con servicios externos (Google Drive, Slack, etc.).
 Internacionalización completa (ya tienes i18n parcialmente).
 
 💡 Tip: Antes de añadir nuevas features, asegúrate de tener tests automáticos para backend y frontend. Esto te da seguridad cuando tu app crezca.
+
+Hacer que el juego de la pantalla de caarga quite los handeEvents para no consumir recursos

@@ -8,7 +8,8 @@ import "./style.css";
 
 export default function DinoGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
+  let animationId: number;
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -181,12 +182,12 @@ const {
       if (gameOver) showText("Tap Screen or Press Space To Start");
       if (waitingToStart) showText("Tap Screen or Press Space To Start");
 
-      requestAnimationFrame(gameLoop);
+      animationId = requestAnimationFrame(gameLoop);
     }
 
     setScreen();
     resetListeners();
-    requestAnimationFrame(gameLoop);
+    animationId = requestAnimationFrame(gameLoop);
 
     window.addEventListener("resize", setScreen);
     window.addEventListener("orientationchange", setScreen);
@@ -194,6 +195,15 @@ const {
     return () => {
       window.removeEventListener("resize", setScreen);
       window.removeEventListener("orientationchange", setScreen);
+      	// mouse
+    window.removeEventListener("mousedown", () => {});
+    window.removeEventListener("mouseup", () => {});
+    // touch
+    window.removeEventListener("touchstart", () => {});
+    window.removeEventListener("touchend", () => {});
+    // keyboard
+    window.removeEventListener("keydown", () => {});
+    window.removeEventListener("keyup", () => {});
     };
   }, []);
 

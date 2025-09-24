@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../services/api";
 
-export default  function Register() {
+export default function Register() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -11,8 +11,10 @@ export default  function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // console.log(form);
     const res = await registerUser(form);
-    setMessage(res.message || "Error en el registro");
+    console.log(res.message);
+    setMessage(res?.message || "Error en el registro");
   };
 
   return (

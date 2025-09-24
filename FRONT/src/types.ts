@@ -1,11 +1,13 @@
 // ----------------- NOTES -----------------
 export interface Note {
-  id?: string;       // Usamos directamente el de Mongo
+  id?: string;
   title: string;
   content: string;
   createdAt?: string;
   updatedAt?: string;
+  userId?: string; // <- nuevo
 }
+
 
 // ----------------- USERS / AUTH -----------------
 export interface User {

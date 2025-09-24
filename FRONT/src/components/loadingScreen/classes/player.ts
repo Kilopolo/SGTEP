@@ -79,6 +79,8 @@ export class Player {
     window.addEventListener("mouseup", this.touchend);
   }
 
+
+
   keydown = (event: KeyboardEvent) => {
     if (event.code === "Space") {
       this.jumpPressed = true;
@@ -128,10 +130,10 @@ export class Player {
         (this.posY > this.canvas.height - this.maxJumpHeight &&
           this.jumpPressed)
       ) {
-        console.log(
-          "es7a",
-          this.JUMP_SPEED - (100 - (this.posY / this.initY) * 100)
-        );
+        // console.log(
+        //   "es7a",
+        //   this.JUMP_SPEED - (100 - (this.posY / this.initY) * 100)
+        // );
         this.posY -=
           (this.JUMP_SPEED - (100 - (this.posY / this.initY) * 100) / 800) *
           frameTimeDelta *

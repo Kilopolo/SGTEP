@@ -3,7 +3,10 @@ import { Note } from "../models/Note.js";
 // Crear nota
 export const createNote = async (req, res) => {
   try {
-    const note = new Note(req.body);
+    const note = new Note({
+      ...req.body,
+      userId: req.user.id
+    });
     await note.save();
     res.status(201).json(note);
   } catch (err) {
@@ -13,17 +16,14 @@ export const createNote = async (req, res) => {
 
 export const getNotes = async (req, res) => {
   try {
-    const notes = await Note.find();
-
-    const formatted = notes.map((n) => ({
+    const notes = await Note.find({ userId: req.user.id });
+    res.json(notes.map(n => ({
       id: n._id.toString(),
       title: n.title,
       content: n.content,
       createdAt: n.createdAt,
       updatedAt: n.updatedAt,
-    }));
-
-    res.json(formatted);
+    })));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

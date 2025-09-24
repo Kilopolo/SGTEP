@@ -1,6 +1,9 @@
+// LoadingScreen.tsx
+
 import DinoGame from "./DinoGame.tsx";
 
-export default function LoadingScreen() {
+export default function LoadingScreen({ isLoading }: { isLoading: boolean }) {
+  if (!isLoading) return null; // cuando isLoading = false, DinoGame se desmonta del DOM
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div id="main-frame-error" className="interstitial-wrapper">
