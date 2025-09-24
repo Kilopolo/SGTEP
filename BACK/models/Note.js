@@ -5,7 +5,8 @@ const noteSchema = new mongoose.Schema({
   content: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  sharedWith: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 export const Note = mongoose.model("Note", noteSchema);

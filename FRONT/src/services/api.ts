@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note,  AuthResponse } from "../types";
+import type { Note, AuthResponse } from "../types";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
@@ -41,7 +41,14 @@ export const getNotes = async () => {
 };
 
 export async function getNoteById(id: string): Promise<Note> {
-  const { data } = await axios.get<Note>(`${API_URL}/notes/${id}`);
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No hay token de autenticación");
+
+  const { data } = await axios.get<Note>(`${API_URL}/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 }
 
@@ -59,13 +66,32 @@ export async function updateNote(
   id: string,
   payload: { title: string; content: string }
 ): Promise<Note> {
-  const { data } = await axios.put<Note>(`${API_URL}/notes/${id}`, payload);
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No hay token de autenticación");
+
+  const { data } = await axios.put<Note>(
+    `${API_URL}/notes/${id}`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return data;
 }
 
 export async function deleteNote(id: string): Promise<{ message: string }> {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No hay token de autenticación");
+
   const { data } = await axios.delete<{ message: string }>(
-    `${API_URL}/notes/${id}`
+    `${API_URL}/notes/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return data;
 }

@@ -19,7 +19,7 @@ export default function NotesDelete() {
     if (!id) return;
     await deleteNote(id);
     toast.success("Nota eliminada ✅");
-    navigate("/notes/view");
+    navigate("/notes");
   };
 
   if (!note) return <p>Cargando...</p>;
@@ -28,7 +28,7 @@ export default function NotesDelete() {
     <ConfirmDialog
       message={`¿Estás seguro que quieres eliminar la nota "${note.title}"?`}
       onConfirm={handleConfirm}
-      onCancel={() => navigate("/notes/view")}
+      onCancel={() => navigate("/notes")}
     />
   );
 }
