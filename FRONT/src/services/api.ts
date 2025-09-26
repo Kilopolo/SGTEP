@@ -103,12 +103,21 @@ export async function shareNote(
   const token = localStorage.getItem("token");
   if (!token) throw new Error("No hay token de autenticación");
 
-  const { data } = await axios.post<{ message: string }>(
-    `${API_URL}/notes/${id}/share`,
-    { targetUserId },
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
+  console.log("[API] Compartiendo nota:", id, "con usuario:", targetUserId);
 
-  return data;
+  try {
+    const { data } = await axios.post<{ message: string }>(
+      `${API_URL}/notes/${id}/share`,
+      { targetUserId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    console.log("[API] Respuesta compartir:", data);
+    return data;
+  } catch  {
+    console.error("[API] Error al compartir");
+    return { message: "Error al compartir" };
+  }
 }
+
 

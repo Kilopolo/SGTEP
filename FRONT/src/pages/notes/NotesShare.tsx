@@ -16,17 +16,21 @@ export default function NotesShare() {
 
   if (!note) return <p>Cargando...</p>;
 
-  const handleShare = async () => {
-    if (!id || !targetUserId) return;
-    try {
-      await shareNote(id, targetUserId);
-      toast.success("Nota compartida correctamente 🎉");
-      setTargetUserId("");
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al compartir la nota");
-    }
-  };
+const handleShare = async () => {
+  if (!id || !targetUserId) return;
+
+  console.log("[UI] Enviando petición de compartir nota", id, "->", targetUserId);
+
+  try {
+    const res = await shareNote(id, targetUserId);
+    console.log("[UI] Respuesta:", res);
+    toast.success(res.message);
+  } catch (err) {
+    console.error("[UI] Error al compartir:", err);
+    toast.error("Error al compartir");
+  }
+};
+
 
   return (
     <div className="p-4">

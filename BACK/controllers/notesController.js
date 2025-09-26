@@ -139,35 +139,47 @@ export const deleteNote = async (req, res) => {
   }
 };
 
+
+
 // Compartir nota
 export const shareNote = async (req, res) => {
-  const { id } = req.params; // nota
-  const { targetUserId } = req.body; // usuario con quien compartir
-  console.log("[SHARE] req.params.id:", id);
-  console.log("[SHARE] req.body.email:", targetUserId.email);
-  console.log("[SHARE] req.user:", req.user);
+  const { id } = req.params; // ID de la nota
+  const { targetUserId } = req.body; // aquí realmente estás recibiendo un email
+  console.log("[SHARE] req.params.id (nota):", id);
+  console.log("[SHARE] req.body:", req.body);
+  console.log("[SHARE] req.user (auth):", req.user);
 
   try {
-    const note = await Note.findById(req.params.id);
-    if (!note) return res.status(404).json({ error: "Nota no encontrada" });
+    const note = await Note.findById(id);
+    if (!note) {
+      console.log("[SHARE] Nota no encontrada");
+      return res.status(404).json({ error: "Nota no encontrada" });
+    }
 
     // Solo el dueño puede compartir
     if (note.userId.toString() !== req.user.id) {
-      return res
-        .status(403)
-        .json({ error: "No tienes permiso para compartir esta nota" });
+      return res.status(403).json({ error: "No tienes permiso para compartir esta nota" });
     }
-    // Añadir usuario si no está ya en sharedWith
-    if (!note.sharedWith.includes(targetUserId)) {
-      note.sharedWith.push(targetUserId);
+
+    // Buscar usuario destino por email
+    const targetUser = await User.findOne({ email: targetUserId });
+    if (!targetUser) {
+      return res.status(404).json({ error: "Usuario con ese email no existe" });
+    }
+
+    // Añadir el ObjectId si no está ya en sharedWith
+    if (!note.sharedWith.includes(targetUser._id)) {
+      note.sharedWith.push(targetUser._id);
       await note.save();
-      console.log("[SHARE] Nota compartida con:", targetUserId.email);
+      console.log("[SHARE] Nota compartida con usuario:", targetUser.email, targetUser._id);
+    } else {
+      console.log("[SHARE] Ya estaba compartida con:", targetUser.email);
     }
 
-
-
+    res.json({ message: `Nota compartida con ${targetUser.email}` });
   } catch (err) {
     console.error("[SHARE] Error:", err.message);
     res.status(400).json({ error: err.message });
   }
 };
+
